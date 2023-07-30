@@ -11,14 +11,32 @@ struct RecordType
 // Fill out this structure
 struct HashType
 {
-
+ struct RecordType* head;
 };
 
 // Compute the hash function
 int hash(int x)
 {
-
+return x % hashSz;
 }
+
+// initialize the hash table
+struct HashType* createHashTable(int hashSz)
+{
+    struct HashType* hashTable = (struct HashType*) malloc(sizeof(struct HashType) * hashSz);
+    if (hashTable == NULL)
+    {
+        printf("Cannot allocate memory\n");
+        exit(-1);
+    }
+    int i;
+    for (i = 0; i < hashSz; ++i)
+    {
+        hashTable[i].head = NULL;
+    }
+    return hashTable;
+}
+
 
 // parses input file to an integer array
 int parseData(char* inputFileName, struct RecordType** ppData)
